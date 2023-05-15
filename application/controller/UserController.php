@@ -7,7 +7,6 @@ class UserController extends Controller {
         return "login"._EXTENSION_PHP;
     }
 
-    // 내가 만들 사이트에 따라 바뀜
     public function loginPost() {
         $result = $this->model->getUser($_POST);
         if(count($result) === 0) {
@@ -19,7 +18,7 @@ class UserController extends Controller {
         $_SESSION[_STR_LOGIN_ID] = $_POST["id"];
 
         // 리스트 페이지로 이동
-        return _BASE_REDIRECT."/product/list";
+        return _BASE_REDIRECT."/shop/main";
     }
         // 로그아웃 메소드
         public function logoutGet() {
@@ -29,6 +28,7 @@ class UserController extends Controller {
             return "login"._EXTENSION_PHP;
         }
 
+        
 
 }
 

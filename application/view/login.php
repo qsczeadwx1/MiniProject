@@ -20,7 +20,10 @@
         <input type="text" name="id" id="id">
         <label for="pw">PW</label>
         <input type="text" name="pw" id="pw">
+        <br>
+        <br>
         <button type="submit">로그인</button>
+        <a href="singup"><button type="button">회원 가입</button></a>
     </form>
 </body>
 </html>
