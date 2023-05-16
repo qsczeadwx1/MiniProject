@@ -42,14 +42,17 @@
     Shop Main
     <a href="/user/login">로그인</a>
     <?php
-if(isset($_SESSION['u_id'])) {
-    $username = $_SESSION['u_id'];           
+if(isset($_POST["id"]) === "" ) {
+  $username = "반갑습니다.";
+}
+else {
+  $username = $_POST["id"];
 }
 ?>
 <body>
     <div class="base">
-        <h2><?php echo "Hi, $username";?></h2>
-        <button type="button" class="btn" onclick="location.href='logout'">
+        <h2><?php echo $username; ?></h2>
+        <button type="button" class="btn" onclick="location.href='/shop/main'">
             LOGOUT
         </button>
     </div>

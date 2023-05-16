@@ -1,0 +1,1 @@
+<a href = <?php echo _URL_HEADER ?> ><h1>Logo</h1></a>

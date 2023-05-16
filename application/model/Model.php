@@ -6,7 +6,7 @@ use PDO;
 use Exception;
 
 class Model {
-    protected $conn;
+    public $conn;
 
     public function __construct() {
         $dns = "mysql:host="._DB_HOST.";dbname="._DB_NAME.";charset="._DB_CHARSET;
@@ -24,10 +24,24 @@ class Model {
             exit();
         }
     }
-        // DB Connect 파기
-        protected function closeConn() {
-            $this->conn = null;
-        }
+    // DB Connect 파기
+    public function close() {
+        $this->conn = null;
     }
+
+    // beginTransaction
+    public function beginTransaction() {
+        $this->conn->beginTransaction();
+    }
+
+    // commit
+    public function commit() {
+        $this->conn->commit();
+    }
+    // rollback
+    public function rollback() {
+        $this->conn->rollback();
+    }
+}
 
 ?>

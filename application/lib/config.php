@@ -19,6 +19,10 @@ define("_BASE_FILENAME_CONTROLLER", "Controller");
 define("_BASE_FILENAME_MODEL", "Model");
 define("_BASE_FILENAME_VIEW", "View");
 
+define("_BASE_FILENAME_HEADER", "header");
+
 define("_BASE_REDIRECT", "Location: ");
 
 define("_STR_LOGIN_ID", "u_id");
+
+define("_URL_HEADER", "/shop/main");

@@ -3,21 +3,26 @@
 namespace application\model;
 
 class UserModel extends Model {
-    public function getUser($arrUserInfo) {
+    public function getUser($arrUserInfo, $pwFlg = true) {
         $sql = " SELECT "
             ." * "
             ." FROM "
             ." user_info "
             ." where "
             ." u_id = :id "
-            ." and "
-            ." u_pw = :pw "
             ;
+
+        if($pwFlg) {
+            $sql .= " and u_pw = :pw ";
+        }
 
         $arr_prepare = [
             ":id" => $arrUserInfo["id"]
-            ,":pw" => $arrUserInfo["pw"]
         ];
+
+        if($pwFlg) {
+            $arr_prepare[":pw"] = $arrUserInfo["pw"];
+        }
 
         try {
             $stmt = $this->conn->prepare($sql);
@@ -26,12 +31,43 @@ class UserModel extends Model {
         } catch (Exception $e) {
             echo "UserModel -> getUser Error: ".$e->getMessage();
             exit();
-        } finally {
-            $this->closeConn();
         }
         return $result;
     }
     
+    // insert User
+    public function insertUser($arrUserInfo) {
+        $sql = " INSERT INTO "
+            . " user_info( "
+            . " u_id "
+            . " ,u_pw "
+            . " ,u_name "
+            . " ,u_signdate "
+            . " ) "
+            . " VALUES( "
+            . " :u_id "
+            . " ,:u_pw "
+            . " ,:u_name "
+            . " ,:u_signdate "
+            ." ); "
+            ;
+
+        $prepare = [
+            ":u_id" => $arrUserInfo["id"]
+            , ":u_pw" => $arrUserInfo["pw"]
+            , ":u_name" => $arrUserInfo["name"]
+            , ":u_signdate" => DATE("Y-m-d H:i:s")
+        ];
+
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $result = $stmt->execute($prepare);
+            return $result;
+        } catch (Exception $e) {
+            return false;
+        }
+
+    }
 }
 
 ?>

@@ -13,17 +13,17 @@
     <title>Login</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <?php include_once(_PATH_VIEW._BASE_FILENAME_HEADER._EXTENSION_PHP)?>
     <h3 style="color: red;"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></h3>
     <form action="/user/login" method="post">
         <label for="id">ID</label>
         <input type="text" name="id" id="id">
         <label for="pw">PW</label>
-        <input type="text" name="pw" id="pw">
+        <input type="password" name="pw" id="pw">
         <br>
         <br>
         <button type="submit">로그인</button>
-        <a href="singup"><button type="button">회원 가입</button></a>
+        <a href="/user/regist">회원 가입</a>
     </form>
 </body>
 </html>
