@@ -40,21 +40,25 @@
         </div>
       </nav>
     Shop Main
-    <a href="/user/login">로그인</a>
-    <?php
-if(isset($_POST["id"]) === "" ) {
-  $username = "반갑습니다.";
+    
+    <?php if(empty($_POST)) {
+  $username = "반갑습니다."; ?> <a href="/user/login">로그인</a>
+  <br>
+  <h3><?php echo $username; ?></h3>
+  <?php
 }
 else {
-  $username = $_POST["id"];
-}
-?>
-<body>
-    <div class="base">
-        <h2><?php echo $username; ?></h2>
-        <button type="button" class="btn" onclick="location.href='/shop/main'">
+  $username = $_POST["id"]; ?> 
+  <form action="/user/logout" method="get">
+        <button type="submit" class="btn" onclick="confirmLogout()">
             LOGOUT
         </button>
+  </form>
+        <br>
+        <a href="/user/detail"><?php echo $username; ?></a>
+<?php } ?>
+    <div class="base">
+        
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

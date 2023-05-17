@@ -17,7 +17,7 @@
     <h3 style="color: red;"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></h3>
     <form action="/user/login" method="post">
         <label for="id">ID</label>
-        <input type="text" name="id" id="id">
+        <input type="text" name="id" id="id" autofocus>
         <label for="pw">PW</label>
         <input type="password" name="pw" id="pw">
         <br>

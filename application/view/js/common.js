@@ -18,14 +18,17 @@ function chkDuplicationId() {
         if(apiData["flg"] === "1") {
             idspan.innerHTML = apiData["msg"];
         } else {
-            idspan.innerHTML = "";
+            idspan.innerHTML = "사용 가능한 ID입니다.";
         }
     })
     // 에러는 alert로 처리
     .catch(error => alert(error.message));
-    
 }
-function idValue() {
-    const id = document.getElementById('id');
-    return document.setAttribute("value", "값");
-}
+
+// function confirmLogout() {
+//     if(!confirm("정말로 로그아웃 하시겠습니까?")) {
+        
+//     } else {
+
+//     }
+// }

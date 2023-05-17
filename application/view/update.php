@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,26 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>회원 가입</h1>
+<h1>정보 수정</h1>
     <br>
     <br>
-
-    <?php if(isset($this->errMsg)) { ?>
-        <div>
-            <span> <?php echo $this->errMsg ?> </span>
-        </div>
-        <?php } ?>
-    
-    <form action="/user/regist" method="post">
         <label for="id">아이디</label>
-        <input type="text" id="id" name="id" maxlength="12" minlength="1" autofocus value="<?php if(isset($_POST["id"])) {$arrPostId = $_POST["id"]; echo $arrPostId;} ?>">
-        <button type="button" onclick="chkDuplicationId();">중복체크</button>
-        <span id="errMsgId">
-            <?php if(isset($this->arrError["id"])) {
-                    echo $this->arrError["id"] ;
-            } ?>
-        </span>
+        <input type="text" id="id" name="id" maxlength="12" minlength="1" value="<?php echo $_SESSION["u_id"]; ?>" readonly>
         <br>
+        <?php var_dump($_GET); var_dump($_POST); var_dump($_SESSION); if(isset($this->arrInfo)) {
+                echo $this->arrInfo;
+            } ?>
+    <form action="/user/update" method="post">
         <label for="pw">비밀번호</label>
         <input type="password" id="pw" name="pw">
         <span> 
@@ -54,8 +42,8 @@
         </span>
         <br>
         <br>
-        <a href="/user/login"><button type="button">취소</button></a>
-        <button type="submit">회원 가입</button>
+        <a href="/user/detail"><button type="button">취소</button></a>
+        <button type="submit">회원 정보 수정</button>
 </form>
     
 

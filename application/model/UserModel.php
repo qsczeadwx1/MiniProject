@@ -66,8 +66,35 @@ class UserModel extends Model {
         } catch (Exception $e) {
             return false;
         }
-
     }
+
+    // update User
+    public function updateUser($arrUserInfo) {
+        $sql = 
+        " UPDATE "
+        ." user_info "
+        ." SET "
+        ." u_pw = :u_pw "
+        ." ,u_name = :u_name "
+        ." WHERE "
+        ." u_id = :u_id "
+        ;
+
+        $prepare = [
+            ":u_pw" => $arrUserInfo["pw"]
+            , ":u_name" => $arrUserInfo["name"]
+            , ":u_id" => $arrUserInfo["id"]
+        ];
+
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $result = $stmt->execute($prepare);
+            return $result;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
 }
 
 ?>
