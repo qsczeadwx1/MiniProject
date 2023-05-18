@@ -3,7 +3,6 @@ function chkDuplicationId() {
     const id = document.getElementById('id');
 
     const url = "/api/user?id=" + id.value;
-    let apiData = null;
     // API
     fetch(url)
     .then(data => { 
@@ -18,7 +17,7 @@ function chkDuplicationId() {
         if(apiData["flg"] === "1") {
             idspan.innerHTML = apiData["msg"];
         } else {
-            idspan.innerHTML = "사용 가능한 ID입니다.";
+            idspan.innerHTML = "중복되지 않은 ID입니다.";
         }
     })
     // 에러는 alert로 처리

@@ -20,6 +20,7 @@ class UserController extends Controller {
 
         // 리스트 페이지로 이동
         return "main"._EXTENSION_PHP;
+        // return "_BASE_REDIRECT./shop/main";
     }
     // 로그아웃 메소드
     public function logout() {
@@ -47,6 +48,7 @@ class UserController extends Controller {
     }
 
     public function updateGet() {
+        $sessInfo = [ "id" => $_SESSION["u_id"] ];
         return "update"._EXTENSION_PHP;
     }
 
@@ -54,18 +56,31 @@ class UserController extends Controller {
     public function registPost() {
         $arrPost = $_POST;
         $arrChkErr = [];
+
         // 유효성체크
         // ID 글자수 체크
-        if(mb_strlen($arrPost["id"]) === 0 || mb_strlen($arrPost["id"]) >= 12) {
+        if(mb_strlen($arrPost["id"]) === 0 || mb_strlen($arrPost["id"]) > 12) {
             $arrChkErr["id"] = "ID는 12글자 이하로 입력해 주세요.";
+            $arrPost["id"] = "";
         }
         // ID 영문 숫자 체크
-
+        $pattern = "/[^a-zA-Z0-9]/";
+        if(preg_match($pattern, $arrPost["id"]) !== 0) {
+            $arrChkErr["id"] = "ID는 영어 대문자, 영어 소문자, 숫자로만 입력해 주세요.";
+        }
         // PW 글자수 체크
         if(mb_strlen($arrPost["pw"]) <= 8 || mb_strlen($arrPost["pw"]) >= 20) {
             $arrChkErr["pw"] = "PW는 8~20글자로 입력해 주세요.";
+            // $arrPost["pw"] = "";
         }
         // PW 영문 숫자 특문 체크
+        $num = preg_match("/[0-9]/", $arrPost["pw"]);
+        $eng = preg_match("/[a-zA-Z]/", $arrPost["pw"]);
+        $spe = preg_match("/[!@#$%^&*]/",$arrPost["pw"]);
+        $vaildChk = preg_match("/[^0-9a-zA-Z!@#$%^&*]/", $arrPost["pw"]);
+        if( $num === 0 || $eng === 0 || $spe === 0 || $vaildChk !== 0 ) {
+            $arrChkErr["pw"] = "PW는 영문, 숫자, 특수문자를 혼합하여 입력해 주세요.";
+        }
 
         // 비밀번호와 비밀번호 체크 확인
         if($arrPost["pw"] !== $arrPost["pwChk"]) {
@@ -105,13 +120,13 @@ class UserController extends Controller {
         $this->model->commit(); // 정상처리 커밋
         // 가입완료 페이지로 이동
         // *************** transcation end
-        return "/registCmp"._EXTENSION_PHP;
+        return _BASE_REDIRECT."/user/registCmp";
     }
 
     public function updatePost() {
-        $session = $_SESSION;
+        // $userInfo = $this->model->getUser($_SESSION["u_id"]);
         $arrPost = $_POST;
-        $arrInfo = ["u_id" => $arrPost["id"]];
+        $sessInfo = [ "id" => $_SESSION["u_id"] ];
         $arrChkErr = [];
         // 유효성체크
         // PW 글자수 체크
@@ -119,12 +134,17 @@ class UserController extends Controller {
             $arrChkErr["pw"] = "PW는 8~20글자로 입력해 주세요.";
         }
         // PW 영문 숫자 특문 체크
-
+        $num = preg_match("/[0-9]/", $arrPost["pw"]);
+        $eng = preg_match("/[a-zA-Z]/", $arrPost["pw"]);
+        $spe = preg_match("/[!@#$%^&*]/",$arrPost["pw"]);
+        $vaildChk = preg_match("/[^0-9a-zA-Z!@#$%^&*]/", $arrPost["pw"]);
+        if( $num === 0 || $eng === 0 || $spe === 0 || $vaildChk !== 0 ) {
+            $arrChkErr["pw"] = "PW는 영문, 숫자, 특수문자를 혼합하여 입력해 주세요.";
+        }
         // 비밀번호와 비밀번호 체크 확인
         if($arrPost["pw"] !== $arrPost["pwChk"]) {
             $arrChkErr["pwChk"] = "비밀번호와 비밀번호 확인이 일치하지 않습니다.";
         }
-
         // 이름 글자수 체크
         if(mb_strlen($arrPost["name"]) === 0 || mb_strlen($arrPost["name"]) > 30) {
             $arrChkErr["name"] = "이름은 30글자 이내로 입력해 주세요.";
@@ -137,11 +157,11 @@ class UserController extends Controller {
             return "update"._EXTENSION_PHP;
         }
         
-        $result = $this->model->getUser($arrPost, false);
+        $result = $this->model->getUser($sessInfo, false);
 
         // **************** transaction start
         $this->model->beginTransaction();
-        // user insert
+        // user update
         if(!$this->model->updateUser($arrPost)) {
             // 예외처리 롤백
             $this->model->rollback();
@@ -149,9 +169,9 @@ class UserController extends Controller {
             exit();
         }
         $this->model->commit(); // 정상처리 커밋
-        // 가입완료 페이지로 이동
+        // 회원 상세 페이지 이동
         // *************** transcation end
-        return "/detail"._EXTENSION_PHP;
+        return _BASE_REDIRECT."/user/detail";
     }
 }
 
