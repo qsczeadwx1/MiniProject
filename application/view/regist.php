@@ -37,7 +37,7 @@
         <br>
         <div class="div_pw">
             <label for="pw">비밀번호</label>
-            <input type="text" id="pw" name="pw">
+            <input type="password" id="pw" name="pw">
             <span> 
                 <?php if(isset($this->arrError["pw"])) { 
                         echo $this->arrError["pw"];
@@ -47,7 +47,7 @@
         <br>
         <div class="div_pwChk">
             <label for="pwChk">비밀번호 확인</label>
-            <input type="text" id="pwChk" name="pwChk">
+            <input type="password" id="pwChk" name="pwChk">
             <span> 
                 <?php if(isset($this->arrError["pwChk"])) {
                         echo $this->arrError["pwChk"];
