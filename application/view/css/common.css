@@ -1,8 +1,137 @@
-.carousel {
-    width: 500px;
+@font-face {
+    font-family: 'TheJamsil5Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
 }
 
-h1{
-color: blue;
-font-size: 50px;
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'GangwonEdu_OTFBoldA';
+    background-color: rgb(255, 250, 244);
+}
+a{
+    text-decoration:none;
+    color: black;
+    font-weight: 700;
+    text-align:center;
+}
+.container-fluid->a{
+    text-decoration:none;
+    color: black;
+    font-weight: 700;
+}
+a:hover{
+    color: black;
+}
+.header_1{
+    font-family: 'TheJamsil5Bold';
+}
+
+.col {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.card:hover{
+    border: 2px solid black;
+}
+.card-body {
+    background-color: rgb(255, 253, 250);
+}
+.footer{
+    padding-top: 20px;
+    text-align:center;
+    position:fixed;
+    bottom:0px;
+    background-color: rgba(0, 0, 0, 50%);;
+    color:white;
+    width:100%;
+    
+}
+.carousel{
+    margin-bottom: 50px;
+}
+.div_header{
+    background-color: #F8F9FA;
+    text-align: center;
+}
+.div_contents{
+    text-align:center;
+    margin: 20px;
+    border:1px solid rgb(0, 0, 0);
+    border-radius: 1rem;
+    position: relative;
+    padding: 2rem;
+    box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.253);
+    display: grid;
+    min-height: 32rem;
+    text-align: center;
+    grid-template-columns: minmax(20rem, 40rem);
+    justify-content: center;
+}
+.div_outside{
+    display: grid;
+    place-items: center;
+}
+.div_button{
+    text-align:center;
+}
+.div_id, .div_pw, .div_pwChk, .div_name {
+    margin: 10px;
+    position: absolute;
+}
+/* .form_contents{
+    position:relative;
+} */
+.div_id{
+    top:100px;
+}
+.div_pw{
+    top:150px;
+}
+.div_pwChk{
+    top:200px;
+}
+.div_name{
+    top:250px;
+}
+input{
+    width: 250px;
+    height: 30px;
+    font-size:20px;
+}
+input:focus{
+    background-color:#b6b3ab;
+}
+
+.div_button->button{
+    margin:20px;
+}
+.button_1{
+    width: 85px;
+    height: 40px;
+    box-shadow: 2px 2px 2px #3f3f3f;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #C2C2C2;
+    margin-right: 2rem;
+  }
+  .button_2{
+    width: 85px;
+    height: 40px;
+    box-shadow: 2px 2px 2px #3f3f3f;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #97958f;
+  }
+#chkDupli{
+    width:85px;
+    height:30px;
 }

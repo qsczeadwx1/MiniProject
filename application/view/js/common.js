@@ -23,11 +23,3 @@ function chkDuplicationId() {
     // 에러는 alert로 처리
     .catch(error => alert(error.message));
 }
-
-// function confirmLogout() {
-//     if(!confirm("정말로 로그아웃 하시겠습니까?")) {
-        
-//     } else {
-
-//     }
-// }

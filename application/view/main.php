@@ -11,20 +11,31 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/shop/main"><?php include_once(_PATH_VIEW._BASE_FILENAME_HEADER._EXTENSION_PHP)?></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <?php include_once(_PATH_VIEW._BASE_FILENAME_HEADER._EXTENSION_PHP); ?>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <?php if(empty($_SESSION["u_id"])) { ?>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="/user/login">로그인</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <?php } else { $username = $_SESSION["u_id"]; ?>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             <?php echo $username; ?>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/user/detail">회원정보</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <form action="/user/logout" method="get">
+              <button type="submit" class="dropdown-item" class="btn">로그아웃</li></button>
+              </form>
+            <?php } ?>
+          </ul>
         </li>
       </ul>
       <form class="d-flex">
@@ -35,26 +46,7 @@
   </div>
 </nav>
 
-  <h1>Shop Main</h1>
-    
-  <?php if(empty($_POST)) {
-  $username = "반갑습니다."; ?> <a href="/user/login">로그인</a>
-  <br>
-  <h3><?php echo $username; ?></h3>
-  <?php
-  } else {
-  $username = $_POST["id"]; ?> 
-  <form action="/user/logout" method="get">
-    <button type="submit" class="btn" onclick="confirmLogout()">
-        LOGOUT
-    </button>
-  </form>
-    <br>
-    <a href="/user/detail"><?php echo $username; ?></a>
-<?php } ?>
-
-
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" >
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -62,13 +54,13 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://image.msscdn.net/images/goods_img/20190327/996178/996178_3_125.jpg" class="d-block w-100" alt="티셔츠">
+      <img src="https://static.coupangcdn.com/wa/cmg_paperboy/image/1683984840742/C1-PC1.jpg" class="d-block w-100" alt="사진">
     </div>
     <div class="carousel-item">
-      <img src="https://image.msscdn.net/images/goods_img/20210906/2112059/2112059_1_125.jpg" class="d-block w-100" alt="바지">
+      <img src="https://static.coupangcdn.com/ja/cmg_paperboy/image/1684400357181/%5B%EC%88%98%EC%A0%95%5D230519_C1_%EC%8B%9D%ED%92%88-%EB%82%98%EB%93%A4%EC%9D%B4-%EC%BB%A8%EC%85%89_SMD-28343_PC.jpg" class="d-block w-100" alt="사진">
     </div>
     <div class="carousel-item">
-      <img src="https://image.msscdn.net/images/goods_img/20190710/1092992/1092992_1_125.jpg" class="d-block w-100" alt="신발">
+      <img src="https://static.coupangcdn.com/ma/cmg_paperboy/image/1684400421248/230519_C1_%EB%A1%9C%EC%BC%93%EB%B0%B0%EC%86%A1_SMD-28347_PC.png" class="d-block w-100" alt="사진">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -83,98 +75,99 @@
 
 
 <div class="container">
-        <div class="row row-xxl-4 row-cols-lg-3">
-          <div class="col d-flex justify-content-center" >
-            <div class="card" style="width: 18rem;">
-                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
-                <div class="card-body">
-                  <h5 class="card-title">티셔츠</h5>
-                  <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    구매하기
-                  </button>
-                </div>
-              </div>
-        
+    <div class="row row-xxl-4 row-cols-lg-3">
+      <div class="col d-flex justify-content-center" >
+        <div class="card border-info mb-3" style="width: 18rem;">
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
+            <div class="card-body">
+              <h5 class="card-title">티셔츠</h5>
+              <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
+              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                구매하기
+              </button>
+            </div>
           </div>
-          <div class="col d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
-                <div class="card-body">
-                  <h5 class="card-title">티셔츠</h5>
-                  <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    구매하기
-                  </button>
-                </div>
-              </div>
-          </div>
-          <div class="col d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
-                <div class="card-body">
-                  <h5 class="card-title">티셔츠</h5>
-                  <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    구매하기
-                  </button>
-                </div>
-              </div>
-          </div>
-          <div class="col d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
-                <div class="card-body">
-                  <h5 class="card-title">티셔츠</h5>
-                  <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    구매하기
-                  </button>
-                </div>
-              </div>
-          </div>
-          <div class="col d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
-                <div class="card-body">
-                  <h5 class="card-title">티셔츠</h5>
-                  <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    구매하기
-                  </button>
-                </div>
-              </div>
-          </div>
-          <div class="col d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
-                <div class="card-body">
-                  <h5 class="card-title">티셔츠</h5>
-                  <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    구매하기
-                  </button>
-                </div>
-              </div>
-          </div>
-          <div class="col d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
-                <div class="card-body">
-                  <h5 class="card-title">티셔츠</h5>
-                  <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    구매하기
-                  </button>
-                </div>
-              </div>
-          </div>
-        </div>
+    
       </div>
+      <div class="col d-flex justify-content-center">
+        <div class="card border-info mb-3" style="width: 18rem;">
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
+            <div class="card-body">
+              <h5 class="card-title">티셔츠</h5>
+              <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
+              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                구매하기
+              </button>
+            </div>
+          </div>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <div class="card border-info mb-3" style="width: 18rem;">
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
+            <div class="card-body">
+              <h5 class="card-title">티셔츠</h5>
+              <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
+              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                구매하기
+              </button>
+            </div>
+          </div>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <div class="card border-info mb-3" style="width: 18rem;">
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
+            <div class="card-body">
+              <h5 class="card-title">티셔츠</h5>
+              <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
+              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                구매하기
+              </button>
+            </div>
+          </div>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <div class="card border-info mb-3" style="width: 18rem;">
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
+            <div class="card-body">
+              <h5 class="card-title">티셔츠</h5>
+              <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
+              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                구매하기
+              </button>
+            </div>
+          </div>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <div class="card border-info mb-3" style="width: 18rem;">
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
+            <div class="card-body">
+              <h5 class="card-title">티셔츠</h5>
+              <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
+              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                구매하기
+              </button>
+            </div>
+          </div>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <div class="card border-info mb-3" style="width: 18rem;">
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTddjq0ktEEuvdrSj3mwYpMbt_yTs9wz-sUfveQkFlRQFw00vHGpJ_UIQqtANNmqo7pDzGJL4Q-3w484suaDcBi2f93bSjzroEFEiNs_zW62lHn0ydM5Jh6V9BSWwqtTdWbP3U&usqp=CAc" class="card-img-top" alt="상품">
+            <div class="card-body">
+              <h5 class="card-title">티셔츠</h5>
+              <p class="card-text">입으면 존재감이 엄청나질 것 같은 티셔츠 입니다.</p>
+              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                구매하기
+              </button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
 
-
-
-
+  <div class="footer">
+        <p>2021. KOREA IT ACADEMY</p>
+    </div>
+    <script src="https://kit.fontawesome.com/15c1734573.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

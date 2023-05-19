@@ -1,1 +1,1 @@
-<a class="navbar-brand" href = <?php echo _URL_HEADER ?> ><h1>Logo</h1></a>
+<a class="navbar-brand header_1" href = "<?php echo _URL_HEADER ?>" ><h1>Logo</h1></a>
